@@ -14,7 +14,14 @@
           <StackPanel Margin="18" Gap="4" Width="200">
             <TextBlock FontSize="16" Text="Simple Bindings"/>
             <TextBox Watermark="Two Way" UseFloatingWatermark="True" Text="{Binding Path=StringValue}" Name="first"/>
-            <TextBox Watermark="One Way" UseFloatingWatermark="True" Text="{Binding Path=StringValue, Mode=OneWay}"/>
+            <TextBox Watermark="One Way" UseFloatingWatermark="True" Text="{Binding Path=StringValue, Converter={Static local:TestConverter.Instance}, Mode=OneWay}">
+              <TextBox.Styles>
+                <Style Selector="TextBox:pointerover /template/ Border#border">
+                  <Setter Property="BorderBrush" 
+                          Value="{Binding Path=StringValue, Converter={Static local:TestConverter.Instance}, Mode=OneWay}"/>
+                </Style>
+              </TextBox.Styles>
+            </TextBox>
             <TextBox Watermark="One Time" UseFloatingWatermark="True" Text="{Binding Path=StringValue, Mode=OneTime}"/>
           </StackPanel>
           <StackPanel Margin="18" Gap="4" Width="200">
